@@ -344,8 +344,33 @@ footer{
             </table>
         </div>
     </div>
+<script>
+    let myAccountBalance = parseInt(document.getElementById("myAccountBalance").innerText);
 
-    <script src="C:/Users/ELCOT/Desktop/Sparks-Foundation-Project-main/script2.js"></script>
+function sendMoney() {
+   var enterName = document.getElementById("enterName").value;
+   var enterAmount = parseInt(document.getElementById("enterAmount").value);
+
+   if (enterAmount > myAccountBalance) {
+      alert("Insufficient Balance.")
+   } else {
+      var findUserBankAccount = enterName + "BankBalance";
+      var finalAmount = parseInt(document.getElementById(findUserBankAccount).innerHTML) + enterAmount;
+      var myAccountBalance = parseInt(document.getElementById("myAccountBalance").innerText) - enterAmount
+      document.getElementById("myAccountBalance").innerText = myAccountBalance
+      document.getElementById(findUserBankAccount).innerHTML = finalAmount;
+      alert(` Transaction Successful !!  
+      ₹${enterAmount} is sent to ${enterName}@email.com.`)
+
+      // transaction history 
+      var createPTag = document.createElement("li");
+      var textNode = document.createTextNode(`$${enterAmount} is sent to recepient with Email-id ${enterName}@email.com on ${Date()}.`);
+      createPTag.appendChild(textNode);
+      var element = document.getElementById("transaction-history-body");
+      element.insertBefore(createPTag, element.firstChild);
+   }
+}
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"></script>
